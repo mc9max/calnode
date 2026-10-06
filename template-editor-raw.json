@@ -1,0 +1,94 @@
+{
+  "PORT": {
+    "value": "3000",
+    "description": "HTTP listen port. Calnode defaults to 3000; Railway maps the public domain to this port."
+  },
+  "BASE_URL": {
+    "value": "http://localhost:3000",
+    "description": "Public identity host (e.g. https://book.example.com or https://<your-domain>.up.railway.app after deploy). Drives OAuth callbacks, the admin UI, and team-invite links. Set your real domain after the first deploy and redeploy — OAuth redirect URIs are computed from this value."
+  },
+  "DATABASE_URL": {
+    "value": "sqlite:///data/calnode.db",
+    "description": "SQLite driver pointing at the Railway volume mount. SQLite is the only store (pure-Go, no CGO, no Postgres). Keep this path — the directory is on the calnode-data volume."
+  },
+  "CALNODE_ENCRYPTION_KEY": {
+    "value": "${{secret(32)}}",
+    "description": "Envelope-encryption master key; auto-generated per deployment. REQUIRED for production (https BASE_URL). Rotatable later with `calnode rotate-key`."
+  },
+  "CALNODE_RECOVERY_SECRET": {
+    "value": "",
+    "description": "Optional break-glass escrow. When set, a recovery-wrapped copy of the data key is stored so you can re-establish access with `calnode recover-key` if CALNODE_ENCRYPTION_KEY is ever lost."
+  },
+  "PUBLIC_BASE_URL": {
+    "value": "",
+    "description": "Optional booker-facing host for public booking links and outbound emails. Blank = inherits BASE_URL. Only set if your booking pages live on a different host than admin."
+  },
+  "TZ": {
+    "value": "UTC",
+    "description": "Timezone for meeting times, reminders, log timestamps. Set to you, e.g. America/New_York."
+  },
+  "GOOGLE_CLIENT_ID": {
+    "value": "",
+    "description": "Optional — Google OAuth client ID (console.cloud.google.com). Add redirect URIs: {BASE_URL}/v1/auth/callback and {BASE_URL}/v1/calendar/callback."
+  },
+  "GOOGLE_CLIENT_SECRET": {
+    "value": "",
+    "description": "Optional — Google OAuth client secret (pair with GOOGLE_CLIENT_ID)."
+  },
+  "MICROSOFT_CLIENT_ID": {
+    "value": "",
+    "description": "Optional — Microsoft 365 / Outlook client ID (Azure App registration). Web redirect URIs: {BASE_URL}/v1/auth/microsoft/callback and {BASE_URL}/v1/calendar/callback."
+  },
+  "MICROSOFT_CLIENT_SECRET": {
+    "value": "",
+    "description": "Optional — Microsoft client secret (pair with MICROSOFT_CLIENT_ID)."
+  },
+  "MICROSOFT_TENANT": {
+    "value": "common",
+    "description": "Microsoft tenant. Default 'common' allows personal + work/school Microsoft accounts. Set to a specific tenant ID to restrict to one organisation."
+  },
+  "EMAIL_SMTP_HOST": {
+    "value": "",
+    "description": "Optional — SMTP host for booking invitation / confirmation / reminder emails. Blank = emails are skipped (app still works; users get links in the UI)."
+  },
+  "EMAIL_SMTP_PORT": {
+    "value": "587",
+    "description": "Optional — SMTP port (default 587, STARTTLS)."
+  },
+  "EMAIL_SMTP_USER": {
+    "value": "",
+    "description": "Optional — SMTP username."
+  },
+  "EMAIL_SMTP_PASS": {
+    "value": "",
+    "description": "Optional — SMTP password."
+  },
+  "EMAIL_FROM_ADDRESS": {
+    "value": "",
+    "description": "Optional — From address for booking emails, e.g. bookings@yourdomain.com."
+  },
+  "EMAIL_FROM_NAME": {
+    "value": "Calnode",
+    "description": "Optional — Display name for booking email sender."
+  },
+  "LITESTREAM_REPLICA_URL": {
+    "value": "",
+    "description": "Optional — S3-compatible bucket for continuous SQLite backups (Litestream) and meeting recordings. e.g. s3://your-bucket/calnode. Blank = no remote backups; the calnode-data volume still holds the primary DB."
+  },
+  "LITESTREAM_ACCESS_KEY_ID": {
+    "value": "",
+    "description": "Optional — S3 access key for Litestream uploads (pair with LITESTREAM_REPLICA_URL)."
+  },
+  "LITESTREAM_SECRET_ACCESS_KEY": {
+    "value": "",
+    "description": "Optional — S3 secret key for Litestream uploads (pair with LITESTREAM_REPLICA_URL)."
+  },
+  "LITESTREAM_ENDPOINT": {
+    "value": "",
+    "description": "Optional — S3 endpoint host. Required for any non-AWS provider (R2, B2, MinIO). Blank = AWS us-east-1."
+  },
+  "LITESTREAM_REGION": {
+    "value": "",
+    "description": "Optional — S3 region (required by some providers, optional by others)."
+  }
+}

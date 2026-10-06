@@ -1,0 +1,19 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile"
+  },
+  "deploy": {
+    "healthcheckPath": "/healthz",
+    "healthcheckTimeout": 90,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 5
+  },
+  "volumes": [
+    {
+      "name": "calnode-data",
+      "mountPath": "/data"
+    }
+  ]
+}

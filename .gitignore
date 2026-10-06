@@ -1,0 +1,5 @@
+# local state
+.data/
+.railway/.local/
+*.log
+.DS_Store
