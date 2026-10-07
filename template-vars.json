@@ -1,142 +1,117 @@
 {
-  "variables": [
-    {
-      "name": "PORT",
-      "defaultValue": "3000",
-      "description": "HTTP listen port. Calnode defaults to 3000; Railway maps the public domain to this port.",
-      "isOptional": true
+    "PORT": {
+        "defaultValue": "3000",
+        "description": "HTTP listen port. Calnode defaults to 3000; Railway maps the public domain to this port.",
+        "isOptional": true
     },
-    {
-      "name": "BASE_URL",
-      "defaultValue": "http://localhost:3000",
-      "description": "Public identity host — the URL your team and bookers use (e.g. https://book.example.com or https://<domain>.up.railway.app). Drives OAuth callbacks, admin UI, and invite links. Set your real domain after the first deploy and redeploy.",
-      "isOptional": false
+    "BASE_URL": {
+        "defaultValue": "http://localhost:3000",
+        "description": "Public identity host \u2014 the URL your team and bookers use (e.g. https://book.example.com or https://<domain>.up.railway.app). Drives OAuth callbacks, admin UI, and invite links. Set your real domain after the first deploy and redeploy.",
+        "isOptional": false
     },
-    {
-      "name": "DATABASE_URL",
-      "defaultValue": "sqlite:///data/calnode.db",
-      "description": "SQLite driver location. SQLite is the only store (pure-Go, no CGO, no Postgres). Keep the /data path — it is on the calnode-data volume.",
-      "isOptional": true
+    "DATABASE_URL": {
+        "defaultValue": "sqlite:///data/calnode.db",
+        "description": "SQLite driver location. SQLite is the only store (pure-Go, no CGO, no Postgres). Keep the /data path \u2014 it is on the calnode-data volume.",
+        "isOptional": true
     },
-    {
-      "name": "CALNODE_ENCRYPTION_KEY",
-      "defaultValue": "${{secret(32)}}",
-      "description": "Envelope-encryption master key (auto-generated). Required for production. Rotatable later with `calnode rotate-key`.",
-      "isOptional": true
+    "CALNODE_ENCRYPTION_KEY": {
+        "defaultValue": "${{secret(32)}}",
+        "description": "Envelope-encryption master key (auto-generated). Required for production. Rotatable later with `calnode rotate-key`.",
+        "isOptional": true
     },
-    {
-      "name": "CALNODE_RECOVERY_SECRET",
-      "defaultValue": "",
-      "description": "Optional break-glass escrow for recovering from a lost CALNODE_ENCRYPTION_KEY.",
-      "isOptional": true
+    "CALNODE_RECOVERY_SECRET": {
+        "defaultValue": "",
+        "description": "Optional break-glass escrow for recovering from a lost CALNODE_ENCRYPTION_KEY.",
+        "isOptional": true
     },
-    {
-      "name": "PUBLIC_BASE_URL",
-      "defaultValue": "",
-      "description": "Optional booker-facing host (blank = inherits BASE_URL).",
-      "isOptional": true
+    "PUBLIC_BASE_URL": {
+        "defaultValue": "",
+        "description": "Optional booker-facing host (blank = inherits BASE_URL).",
+        "isOptional": true
     },
-    {
-      "name": "TZ",
-      "defaultValue": "UTC",
-      "description": "Timezone for meetings, reminders, logs. e.g. America/New_York.",
-      "isOptional": true
+    "TZ": {
+        "defaultValue": "UTC",
+        "description": "Timezone for meetings, reminders, logs. e.g. America/New_York.",
+        "isOptional": true
     },
-    {
-      "name": "GOOGLE_CLIENT_ID",
-      "defaultValue": "",
-      "description": "Optional Google OAuth client ID. Add redirect {BASE_URL}/v1/auth/callback + {BASE_URL}/v1/calendar/callback.",
-      "isOptional": true
+    "GOOGLE_CLIENT_ID": {
+        "defaultValue": "",
+        "description": "Optional Google OAuth client ID. Add redirect {BASE_URL}/v1/auth/callback + {BASE_URL}/v1/calendar/callback.",
+        "isOptional": true
     },
-    {
-      "name": "GOOGLE_CLIENT_SECRET",
-      "defaultValue": "",
-      "description": "Optional Google OAuth client secret.",
-      "isOptional": true
+    "GOOGLE_CLIENT_SECRET": {
+        "defaultValue": "",
+        "description": "Optional Google OAuth client secret.",
+        "isOptional": true
     },
-    {
-      "name": "MICROSOFT_CLIENT_ID",
-      "defaultValue": "",
-      "description": "Optional Microsoft 365 / Outlook client ID (Azure App registration).",
-      "isOptional": true
+    "MICROSOFT_CLIENT_ID": {
+        "defaultValue": "",
+        "description": "Optional Microsoft 365 / Outlook client ID (Azure App registration).",
+        "isOptional": true
     },
-    {
-      "name": "MICROSOFT_CLIENT_SECRET",
-      "defaultValue": "",
-      "description": "Optional Microsoft client secret.",
-      "isOptional": true
+    "MICROSOFT_CLIENT_SECRET": {
+        "defaultValue": "",
+        "description": "Optional Microsoft client secret.",
+        "isOptional": true
     },
-    {
-      "name": "MICROSOFT_TENANT",
-      "defaultValue": "common",
-      "description": "Microsoft tenant; 'common' = personal + work/school. Set a tenant ID to restrict to your org.",
-      "isOptional": true
+    "MICROSOFT_TENANT": {
+        "defaultValue": "common",
+        "description": "Microsoft tenant; 'common' = personal + work/school. Set a tenant ID to restrict to your org.",
+        "isOptional": true
     },
-    {
-      "name": "EMAIL_SMTP_HOST",
-      "defaultValue": "",
-      "description": "Optional SMTP host for booking invitation / confirmation emails. Blank = no email.",
-      "isOptional": true
+    "EMAIL_SMTP_HOST": {
+        "defaultValue": "",
+        "description": "Optional SMTP host for booking invitation / confirmation emails. Blank = no email.",
+        "isOptional": true
     },
-    {
-      "name": "EMAIL_SMTP_PORT",
-      "defaultValue": "587",
-      "description": "Optional SMTP port (587 STARTTLS default).",
-      "isOptional": true
+    "EMAIL_SMTP_PORT": {
+        "defaultValue": "587",
+        "description": "Optional SMTP port (587 STARTTLS default).",
+        "isOptional": true
     },
-    {
-      "name": "EMAIL_SMTP_USER",
-      "defaultValue": "",
-      "description": "Optional SMTP username.",
-      "isOptional": true
+    "EMAIL_SMTP_USER": {
+        "defaultValue": "",
+        "description": "Optional SMTP username.",
+        "isOptional": true
     },
-    {
-      "name": "EMAIL_SMTP_PASS",
-      "defaultValue": "",
-      "description": "Optional SMTP password.",
-      "isOptional": true
+    "EMAIL_SMTP_PASS": {
+        "defaultValue": "",
+        "description": "Optional SMTP password.",
+        "isOptional": true
     },
-    {
-      "name": "EMAIL_FROM_ADDRESS",
-      "defaultValue": "",
-      "description": "Optional From address, e.g. bookings@yourdomain.com.",
-      "isOptional": true
+    "EMAIL_FROM_ADDRESS": {
+        "defaultValue": "",
+        "description": "Optional From address, e.g. bookings@yourdomain.com.",
+        "isOptional": true
     },
-    {
-      "name": "EMAIL_FROM_NAME",
-      "defaultValue": "Calnode",
-      "description": "Optional sender display name.",
-      "isOptional": true
+    "EMAIL_FROM_NAME": {
+        "defaultValue": "Calnode",
+        "description": "Optional sender display name.",
+        "isOptional": true
     },
-    {
-      "name": "LITESTREAM_REPLICA_URL",
-      "defaultValue": "",
-      "description": "Optional S3 bucket for continuous SQLite backups (Litestream) + meeting recordings. e.g. s3://bucket/calnode. Blank = local volume only.",
-      "isOptional": true
+    "LITESTREAM_REPLICA_URL": {
+        "defaultValue": "",
+        "description": "Optional S3 bucket for continuous SQLite backups (Litestream) + meeting recordings. e.g. s3://bucket/calnode. Blank = local volume only.",
+        "isOptional": true
     },
-    {
-      "name": "LITESTREAM_ACCESS_KEY_ID",
-      "defaultValue": "",
-      "description": "Optional S3 access key (pair with LITESTREAM_REPLICA_URL).",
-      "isOptional": true
+    "LITESTREAM_ACCESS_KEY_ID": {
+        "defaultValue": "",
+        "description": "Optional S3 access key (pair with LITESTREAM_REPLICA_URL).",
+        "isOptional": true
     },
-    {
-      "name": "LITESTREAM_SECRET_ACCESS_KEY",
-      "defaultValue": "",
-      "description": "Optional S3 secret key (pair with LITESTREAM_REPLICA_URL).",
-      "isOptional": true
+    "LITESTREAM_SECRET_ACCESS_KEY": {
+        "defaultValue": "",
+        "description": "Optional S3 secret key (pair with LITESTREAM_REPLICA_URL).",
+        "isOptional": true
     },
-    {
-      "name": "LITESTREAM_ENDPOINT",
-      "defaultValue": "",
-      "description": "Optional S3 endpoint host. Required for non-AWS providers (R2, B2, MinIO).",
-      "isOptional": true
+    "LITESTREAM_ENDPOINT": {
+        "defaultValue": "",
+        "description": "Optional S3 endpoint host. Required for non-AWS providers (R2, B2, MinIO).",
+        "isOptional": true
     },
-    {
-      "name": "LITESTREAM_REGION",
-      "defaultValue": "",
-      "description": "Optional S3 region.",
-      "isOptional": true
+    "LITESTREAM_REGION": {
+        "defaultValue": "",
+        "description": "Optional S3 region.",
+        "isOptional": true
     }
-  ]
 }
